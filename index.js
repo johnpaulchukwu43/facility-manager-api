@@ -27,7 +27,7 @@ console.log(JSON.stringify(secret));
 const environment = secret.nodeEnv;
 
 if(environment === 'development'){
-    mongoose.connect(secret.database, { useNewUrlParser: true }, (err)=> {
+    mongoose.connect(secret.database, { useNewUrlParser: true, useUnifiedTopology: true}, (err)=> {
         if (err) {
             console.log(err);
         } else {
