@@ -4,6 +4,7 @@
   "description": "API for facility manager api",
   "main": "index.js",
   "scripts": {
+    "rimraf": "./node_modules/rimraf/bin.js",
     "debug": "npm run build && node $NODE_DEBUG_OPTION dist/index.js",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/index.js"
