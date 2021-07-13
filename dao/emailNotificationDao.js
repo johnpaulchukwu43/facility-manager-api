@@ -45,7 +45,7 @@ export const createManagerToClientOnboardNotification = async (req, res) => {
     sender: secret.emailSender,
     senderAddress: secret.emailSenderAddress,
     subject: constants.FACILITY_MANAGER_TO_CLIENT_ONBOARD_REQUEST_TITLE,
-    message: constants.getFacilityManagerToClientOnboardRequestMessage(req.recipientName, req.facilityManagerName, req.notificationUrl,req.userType),
+    message: constants.getFacilityManagerToClientOnboardRequestMessage(req.recipientName, req.facilityManagerName, req.notificationUrl,req.userType, req.reference),
     notificationStatus: constants.NOTIFICATION_STATUS.PENDING,
     reference:util.genRef(),
     notificationType: constants.NOTIFICATION_TYPES.MANAGER_TO_CLIENT_ONBOARD_REQUEST,

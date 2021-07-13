@@ -97,16 +97,13 @@ const FACILITY_MANAGER_TO_CLIENT_ONBOARD_REQUEST_TITLE = "Clover app onboard req
 
 const TASK_NOTIFICATION_TITLE = "Clover App Task Notification.";
 
-function getFacilityManagerOnboardedMessage(name) {
-  return "Hello" + name + "\n" +
-    "You have successfully been onBoarded on Clover Facility management app.\n" +
+function getFacilityManagerOnboardedMessage() {
+  return "Welcome to CloverPro facility management app.\n We are excited to have you with us and can't wait to get you running." +
     "Please proceed to login using your credentials."
 }
 
-function getFacilityManagerToClientOnboardRequestMessage(clientName, managerName, notificationUrl, userType) {
-  return "Hello" + clientName + "\n" +
-    "Facility manager: " +managerName+ "on Clover Facility management app, as invited you to join as an:" +userType+ ".\n" +
-    "Please visit:"+notificationUrl+". to complete the sign up process."
+function getFacilityManagerToClientOnboardRequestMessage(clientName, managerName, notificationUrl, userType, reference) {
+  return `You have been invited by: ${managerName} (Facility manager),to join as an ${userType} on the CloverPro Facility management app.\n Please visit ${notificationUrl} and use this reference: ${reference} to complete the sign up process.`
 }
 
 
@@ -118,14 +115,14 @@ const getTaskStatusChangeNotificationMessgae = (name,taskName, userType, oldStat
     switch (userType) {
 
       case USER_TYPES.FACILITY_MANAGER:
-        return `Hello ${name},\nA task with name: ${taskName} and reference: ${reference} was just logged on the System. \nLogin to System to view more details.`;
+        return `A task with name: ${taskName} and reference: ${reference} was just logged on the System. \nLogin to System to view more details.`;
       case USER_TYPES.OCCUPANT:
-        return `Hello ${name}, \nYour request with name: ${taskName} and reference: ${reference} was logged successfully on the System as a task and notification sent to the Facility manager.`;
+        return `Your request with name: ${taskName} and reference: ${reference} was logged successfully on the System as a task and notification sent to the Facility manager.`;
     }
   }
 
   if(newStatus === TASK_STATUS.CLOSED){
-    return `Hello ${name}, \nThis is an update on the ${taskName} task with reference: ${reference}.\nIt has been closed.`
+    return `This is an update on the '${taskName}' task with reference: ${reference}.\nIt has been closed.`
   }
 
   if(newStatus === TASK_STATUS.TASK_COMPLETE_PENDING_REVIEW){
@@ -133,11 +130,11 @@ const getTaskStatusChangeNotificationMessgae = (name,taskName, userType, oldStat
     switch (userType) {
 
       case USER_TYPES.FACILITY_MANAGER:
-        return `The task with name: ${taskName} and reference: ${reference} has been marked as completed by ${artisanName} but it is awaiting your approval.\nLogin to System to view more details.`;
+        return `The task with name: '${taskName}' and reference: ${reference} has been marked as completed by ${artisanName}, but it is awaiting your approval.\nLogin to System to view more details.`;
       case USER_TYPES.OCCUPANT:
-        return `This is an update on the ${taskName} task with reference: ${reference}.\nIt has been marked as completed by Artisan: ${artisanName} and is awaiting final approval by your facility manager.`;
+        return `This is an update on the '${taskName}' task with reference: ${reference}.\nIt has been marked as completed by Artisan: ${artisanName} and is awaiting final approval by your facility manager.`;
       case USER_TYPES.ARTISAN:
-        return `This is an update on the ${taskName} task with reference: ${reference}.\nYou have successfully marked it as completed but is awaiting final approval by your facility manager.`
+        return `This is an update on the '${taskName}' task with reference: ${reference}.\nYou have successfully marked it as completed but is awaiting final approval by your facility manager.`
     }
   }
 
@@ -146,17 +143,17 @@ const getTaskStatusChangeNotificationMessgae = (name,taskName, userType, oldStat
 
     if(userType === USER_TYPES.ARTISAN){
 
-      return `Hello ${artisanName}, \nYou have just been assigned a task with name: ${taskName} and reference: ${reference}.\nPlease login to System to view more details.`
+      return `You have just been assigned a task with name: ${taskName} and reference: ${reference}.\nPlease login to System to view more details.`
     }
 
-    return `Hello ${name}, \nThis is an update on the ${taskName} task with reference: ${reference}.\nIt has been assigned to <b>${artisanName}.</b>`
+    return `This is an update on the ${taskName} task with reference: ${reference}.\nIt has been assigned to ${artisanName}.`
   }
 
   if(newStatus === TASK_STATUS.COMPLETED){
-    return `This is an update on the <b>${taskName}</b> task and reference: <b>${reference}.</b> \n it has been marked as completed.`
+    return `This is an update on the '${taskName}' task with reference: ${reference}.\n it has been marked as completed.`
   }
 
-  return `Hello ${name},\nThis is an update on the ${taskName} task and reference: ${reference}.\nIt has changed status from <b>'${oldStatus}'</b> to <b>'${newStatus}'</b>`
+  return `This is an update on the '${taskName}' task with reference: ${reference}.\nIt has changed status from '${oldStatus}' to '${newStatus}'`
 };
 
 

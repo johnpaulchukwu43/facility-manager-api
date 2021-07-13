@@ -15,7 +15,7 @@ var customSchema = Object.assign({}, {
   isEmailSent: {type: Boolean, default: false},
   facilityManagerId: { type: Schema.Types.ObjectId, required: true },
   isAccountCreated: {type: Boolean, default: false},
-  notificationUrl: {type: String, required: true, unique: true}
+  notificationUrl: {type: String, required: true}
 
 }, auditSchema);
 

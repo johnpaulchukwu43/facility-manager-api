@@ -17,7 +17,7 @@ class User {
 
       let data = await UserModel.paginate(searchQuery, {page: param.pageNum, limit:param.pageSize,sort:sortBy});
 
-      return {status: SYSTEM_STATUS.SUCCESS, data: data.docs};
+      return {status: SYSTEM_STATUS.SUCCESS, data};
     } catch (e) {
       console.log(e);
       return {message: "Error getting user", status: SYSTEM_STATUS.ERROR};
