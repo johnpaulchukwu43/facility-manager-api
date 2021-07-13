@@ -1,8 +1,11 @@
+import {clientAppUrl} from "../config/secret";
 
 var managerToClientOnboardRequestDao = require('../dao/managerToClientOnboardRequestDao');
 const tokenChecker = require("../common/util").tokenChecker;
 const generateRef = require("../common/util").genRef;
 const constants = require("../common/constants");
+
+
 
 
 module.exports = function (router) {
@@ -13,9 +16,7 @@ module.exports = function (router) {
     //todo validate userType as valid and existent
     //todo ensure email is unique
 
-    var reference = generateRef();
-
-    var notificationUrl = "baseUrl.com/onbaord/"+req.body.userType+"/"+reference;
+    let notificationUrl = `${clientAppUrl}user/sign-up`;
 
 
     var request = {
@@ -27,7 +28,7 @@ module.exports = function (router) {
       notificationUrl: notificationUrl,
       facilityManagerId: req.decoded.userId,
       facilityManagerName: req.decoded.name,
-      reference: reference,
+      reference: generateRef(),
       isEmailSent: false,
       isAccountCreated: false
     };

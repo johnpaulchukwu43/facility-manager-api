@@ -14,6 +14,8 @@ export const processTaskNotificationChange = async (req, res, shouldReturnHttpRe
 
     console.log("data here during process"+JSON.stringify(data));
 
+    data = data.docs;
+
     if(status !== SYSTEM_STATUS.SUCCESS) {
       console.log(message);
       return res.json({status: SYSTEM_STATUS.ERROR, message: "Update status failed. could not retrieve users assigned to task."});
@@ -91,10 +93,10 @@ export const processTaskNotificationChange = async (req, res, shouldReturnHttpRe
         let ar3 = extractArtisanInfo(data, res);
         let artisanName3 = `${ar3.firstname} ${ar3.lastname}`;
         if(isNotEmpty(occupantId)){
-          await createTaskStatusChangeNotification(occupantFirstName,occupantLastName, NOTIFICATION_TYPES.TASK_COMPLETE_PENDING_REVIEW,name,USER_TYPES.OCCUPANT,oldStatus,newStatus,occupantEmail,taskReference,{artisanName3},res);
+          await createTaskStatusChangeNotification(occupantFirstName,occupantLastName, NOTIFICATION_TYPES.TASK_COMPLETE_PENDING_REVIEW,name,USER_TYPES.OCCUPANT,oldStatus,newStatus,occupantEmail,taskReference,{artisanName: artisanName3},res);
         }
-        await createTaskStatusChangeNotification(fm3.firstname,fm3.lastname, NOTIFICATION_TYPES.TASK_COMPLETE_PENDING_REVIEW,name,USER_TYPES.FACILITY_MANAGER,oldStatus,newStatus,fm3.email,taskReference,{artisanName3},res);
-        await createTaskStatusChangeNotification(ar3.firstname,ar3.lastname, NOTIFICATION_TYPES.TASK_COMPLETE_PENDING_REVIEW,name,USER_TYPES.ARTISAN,oldStatus,newStatus,ar3.email,taskReference,{artisanName3},res);
+        await createTaskStatusChangeNotification(fm3.firstname,fm3.lastname, NOTIFICATION_TYPES.TASK_COMPLETE_PENDING_REVIEW,name,USER_TYPES.FACILITY_MANAGER,oldStatus,newStatus,fm3.email,taskReference,{artisanName: artisanName3},res);
+        await createTaskStatusChangeNotification(ar3.firstname,ar3.lastname, NOTIFICATION_TYPES.TASK_COMPLETE_PENDING_REVIEW,name,USER_TYPES.ARTISAN,oldStatus,newStatus,ar3.email,taskReference,{artisanName: artisanName3},res);
         break;
 
       case TASK_STATUS.COMPLETED:
